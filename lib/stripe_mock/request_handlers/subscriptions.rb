@@ -188,7 +188,8 @@ module StripeMock
         # canceled_at will still reflect the date of the initial cancellation request,
         # not the end of the subscription period when the subscription
         # is automatically moved to a canceled state.
-        if subscription[:cancel_at_period_end]
+        if params[:cancel_at_period_end]
+          subscription[:cancel_at_period_end] = true
           subscription[:canceled_at] = Time.now.to_i
         end
 
