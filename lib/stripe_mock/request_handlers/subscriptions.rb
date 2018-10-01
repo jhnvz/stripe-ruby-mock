@@ -183,9 +183,13 @@ module StripeMock
         end
         verify_card_present(customer, subscription_plans.first, subscription)
 
+        # If the subscription has been canceled, the date of that cancellation.
+        # If the subscription was canceled with cancel_at_period_end,
+        # canceled_at will still reflect the date of the initial cancellation request,
+        # not the end of the subscription period when the subscription
+        # is automatically moved to a canceled state.
         if subscription[:cancel_at_period_end]
-          subscription[:cancel_at_period_end] = false
-          subscription[:canceled_at] = nil
+          subscription[:canceled_at] = Time.now.to_i
         end
 
         params[:current_period_start] = subscription[:current_period_start]
