@@ -196,6 +196,14 @@ module StripeMock
           subscription[:canceled_at] = nil
         end
 
+        if params[:billing]
+          subscription[:billing] = params[:billing]
+        end
+
+        if params[:days_until_due]
+          subscription[:days_until_due] = params[:days_until_due]
+        end
+
         params[:current_period_start] = subscription[:current_period_start]
         subscription = resolve_subscription_changes(subscription, subscription_plans, customer, params)
 
