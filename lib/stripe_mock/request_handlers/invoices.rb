@@ -28,6 +28,7 @@ module StripeMock
       end
       
       def mark_uncollectible(route, method_url, params, headers)
+        assert_existence :invoice, $1, invoices[$1]
         invoices[$1].merge!(:status => 'uncollectible')
       end
 
